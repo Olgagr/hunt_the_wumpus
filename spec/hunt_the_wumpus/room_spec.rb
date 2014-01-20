@@ -28,4 +28,46 @@ describe HuntTheWumpus::Room do
     expect(room.has?(:bats)).to be_false
   end
 
+  describe 'with neighbors' do
+
+    let(:exit_numbers) { [11, 3, 7] }
+
+    before do
+      exit_numbers.each { |i| room.connect(HuntTheWumpus::Room.new(i)) }
+    end
+
+    it 'can find neighbor by number' do
+      number = exit_numbers[0]
+      expect(room.neighbor(number).number).to eq number
+    end
+
+    it 'can check connections bidirectionally' do
+      number = exit_numbers[0]
+      expect(room.neighbor(number).neighbor(room.number)).to eq room
+    end
+
+    it 'knows the numbers of all neighboring rooms' do
+      expect(room.exits).to eq exit_numbers
+    end
+
+    it 'can choose a neighbor randomly' do
+      expect(exit_numbers).to include(room.random_neighbor.number)
+    end
+
+    it 'is not safe if it has hazards' do
+      room.add(:wumpus)
+      expect(room.safe?).to be_false
+    end
+
+    it 'is not safe if its neighbors have hazards' do
+      room.random_neighbor.add(:wumpus)
+      expect(room.safe?).to be_false
+    end
+
+    it 'is safe when it and its neighbors have no hazards' do
+      expect(room.safe?).to be_true
+    end
+
+  end
+
 end
