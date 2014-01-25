@@ -28,7 +28,7 @@ module HuntTheWumpus
     end
 
     def connect(neighbor)
-      neighbors[neighbor.number] = neighbor
+      self.neighbors[neighbor.number] = neighbor
       neighbor.neighbors[number] = self
     end
 
