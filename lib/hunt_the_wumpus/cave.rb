@@ -12,8 +12,6 @@ module HuntTheWumpus
       build_cave
     end
 
-
-
     def room(index)
     	rooms.find { |r| r.number == index }		
     end
@@ -27,16 +25,26 @@ module HuntTheWumpus
       rooms[:to].add hazard
     end
 
+    def add_hazard(hazard, number_of_rooms)
+      number_of_rooms.times do
+        room = random_room
+        redo if room.has?(hazard)
+        room.add hazard
+      end
+    end
+
     private
 
     def build_cave
-    	cave_map.each do |con|
-    		room = room(con[0]) || Room.new(con[0])
-    		neighbor = room(con[1]) || Room.new(con[1])
+      (1..20).each do |n|
+        rooms << Room.new(n)
+      end
 
-    		room.connect neighbor
-    		add room
-    		add neighbor
+    	cave_map.each do |con|
+    		room = room(con[0])
+    		neighbor = room(con[1])
+
+    		room.connect(neighbor) 
     	end
     end
 

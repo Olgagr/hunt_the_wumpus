@@ -31,4 +31,9 @@ describe HuntTheWumpus::Cave do
     expect(neighbor.has?(:bats)).to be_true     
   end
 
+  it "can add hazards at random to a specific number rooms" do
+    cave.add_hazard :bats, 3
+    expect(rooms.select { |r| r.has?(:bats) }.size).to eq 3  
+  end
+
 end
