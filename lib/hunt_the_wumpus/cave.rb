@@ -18,6 +18,15 @@ module HuntTheWumpus
     	rooms.find { |r| r.number == index }		
     end
 
+    def random_room
+      rooms.sample
+    end
+
+    def move(hazard, rooms)
+      rooms[:from].remove hazard
+      rooms[:to].add hazard
+    end
+
     private
 
     def build_cave

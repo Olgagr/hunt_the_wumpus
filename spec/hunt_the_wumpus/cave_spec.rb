@@ -13,9 +13,22 @@ describe HuntTheWumpus::Cave do
 
   it 'has 20 rooms which all neighbors are connected with this room' do
   	rooms.each do |room|
-  		
-  		expect(room.neighbors.values.all? {|n| n.neighbors.values.include?(room)}).to be_true
+  		expect(room.neighbors.all? {|n| n.neighbors.include?(room)}).to be_true
   	end
+  end
+
+  it "can select rooms at random" do
+    expect(Set[*rooms]).to include(cave.random_room) 
+  end
+
+  it "can move hazards from one room to another" do
+    room = cave.random_room
+    neighbor = room.neighbors.first
+
+    room.add(:bats)
+
+    cave.move :bats, from: room, to: neighbor
+    expect(neighbor.has?(:bats)).to be_true     
   end
 
 end

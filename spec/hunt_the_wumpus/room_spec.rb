@@ -10,7 +10,7 @@ describe HuntTheWumpus::Room do
 
   it 'is empty when initialized' do
     expect(room.empty?).to be_true
-  end
+  end  
 
   it 'can contain hazard' do
     room.add(:wumpus)
@@ -47,7 +47,7 @@ describe HuntTheWumpus::Room do
     end
 
     it 'knows the numbers of all neighboring rooms' do
-      expect(room.exits).to eq exit_numbers
+      expect(room.exits.map(&:number)).to eq exit_numbers
     end
 
     it 'can choose a neighbor randomly' do

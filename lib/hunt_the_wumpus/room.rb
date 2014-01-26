@@ -8,7 +8,7 @@ module HuntTheWumpus
     def initialize(number)
       @number = number
       @hazards = []
-      @neighbors = {}
+      @neighbors = []
     end
 
     def empty?
@@ -28,25 +28,24 @@ module HuntTheWumpus
     end
 
     def connect(neighbor)
-      self.neighbors[neighbor.number] = neighbor
-      neighbor.neighbors[number] = self
+      self.neighbors << neighbor
+      neighbor.neighbors << self
     end
 
     def neighbor(number)
-      neighbors[number]
+      neighbors.find { |n| n.number == number } 
     end
 
     def exits
-      neighbors.keys
+      neighbors
     end
 
     def random_neighbor
-      random = neighbors.keys.shuffle[0]
-      neighbors[random]
+      neighbors.sample
     end
 
     def safe?
-      empty? && neighbors.all? { |k,v| v.empty? }
+      empty? && neighbors.all? { |n| n.empty? }
     end
 
   end
