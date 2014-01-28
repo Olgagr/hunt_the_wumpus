@@ -33,6 +33,14 @@ module HuntTheWumpus
       end
     end
 
+    def room_with(hazard)
+      rooms.find { |r| r.has?(hazard) }
+    end
+
+    def entrance
+      rooms.find { |r| r.safe? }
+    end
+
     private
 
     def build_cave

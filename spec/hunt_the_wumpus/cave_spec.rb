@@ -36,4 +36,19 @@ describe HuntTheWumpus::Cave do
     expect(rooms.select { |r| r.has?(:bats) }.size).to eq 3  
   end
 
+  it "can find room with a particular hazard" do
+    cave.add_hazard(:wumpus, 1)
+    expect(cave.room_with(:wumpus).has?(:wumpus))
+  end
+
+  it "can find a safe room to sarve as an entrance" do
+    cave.add_hazard(:wumpus, 1)
+    cave.add_hazard(:pit, 3)
+    cave.add_hazard(:bats, 3)
+
+    entrance = cave.entrance
+
+    expect(entrance.safe?).to be_true 
+  end
+
 end
