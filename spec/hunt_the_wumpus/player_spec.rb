@@ -2,6 +2,7 @@ require_relative '../spec_helper'
 
 
 module HuntTheWumpus
+
 	describe Player do
 		
 		let(:player) { HuntTheWumpus::Player.new }
@@ -34,6 +35,20 @@ module HuntTheWumpus
 			end
 			expect(player.senses[:wumpus].call).to eq 'this is terrible smell!'  
 		end		
+
+		it "can remember encounters" do
+			player.encounter :wumpus do
+				'aaaa!'
+			end
+			expect(player.encounters[:wumpus].call).to eq 'aaaa!' 
+		end	
+
+		it "can remember actions" do
+			player.action :move do
+				'go on'
+			end
+			expect(player.actions[:move].call).to eq 'go on' 
+		end
 
 
 	end

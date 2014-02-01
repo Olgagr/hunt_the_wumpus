@@ -18,7 +18,7 @@ module HuntTheWumpus
 			self.encounters[hazard] = callback
 		end
 
-		def actions(name, &callback)
+		def action(name, &callback)
 			self.actions[name] = callback
 		end
 
