@@ -22,12 +22,27 @@ module HuntTheWumpus
 		before do
 			empty_room.connect(bat_room)
 			empty_room.connect(wumpus_room)
+
+			player.encounter :bats do
+				player.enter empty_room
+			end
 		end
 
-		it "can enter the room" do
-			player.enter(empty_room)
-			expect(player.room.number).to eq 1 
+		describe "enter the room" do
+			
+			it "knows in which room he is" do
+				player.enter(empty_room)
+				expect(player.room.number).to eq 1 
+			end	
+
+			it "encounter all creatuers in room" do
+				player.enter bat_room
+				expect(player.room.number).to eq 1 	
+			end
+
 		end
+
+		
 
 		it "can remember senses" do
 			player.sense :wumpus do
@@ -49,6 +64,8 @@ module HuntTheWumpus
 			end
 			expect(player.actions[:move].call).to eq 'go on' 
 		end
+
+
 
 
 	end

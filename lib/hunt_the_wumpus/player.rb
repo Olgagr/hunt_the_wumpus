@@ -24,6 +24,9 @@ module HuntTheWumpus
 
 		def enter(room)
 			self.room = room
+			encounters.each do |hazard, action| 
+				action.call if room.has?(hazard)
+			end
 		end
 		
 	end
