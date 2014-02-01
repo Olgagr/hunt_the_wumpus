@@ -25,7 +25,13 @@ module HuntTheWumpus
 		def enter(room)
 			self.room = room
 			encounters.each do |hazard, action| 
-				action.call if room.has?(hazard)
+				return action.call if room.has?(hazard)
+			end
+		end
+
+		def explore_room
+			senses.each do |hazard, action| 
+				action.call if room.neighbors.any? { |n| n.has?(hazard) }
 			end
 		end
 		

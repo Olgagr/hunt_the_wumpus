@@ -22,10 +22,6 @@ module HuntTheWumpus
 		before do
 			empty_room.connect(bat_room)
 			empty_room.connect(wumpus_room)
-
-			player.encounter :bats do
-				player.enter empty_room
-			end
 		end
 
 		describe "enter the room" do
@@ -36,15 +32,25 @@ module HuntTheWumpus
 			end	
 
 			it "encounter all creatuers in room" do
+				player.encounter :bats do
+					player.enter empty_room
+				end
+
 				player.enter bat_room
 				expect(player.room.number).to eq 1 	
 			end
 
 		end
 
-		
+		it "can explore room" do
+			player.sense :wumpus do
+				player.enter bat_room
+			end
 
-		
+			player.enter empty_room
+			player.explore_room
+			expect(player.room.number).to eq 3
+		end
 
 		it "can remember senses" do
 			player.sense :wumpus do
