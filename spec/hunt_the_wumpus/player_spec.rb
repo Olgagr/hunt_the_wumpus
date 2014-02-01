@@ -12,7 +12,7 @@ module HuntTheWumpus
 		end 
 
 		let(:bat_room) do
-			HuntTheWumpus::Player.new(3).tap { |e| e.add(:bats) }
+			HuntTheWumpus::Room.new(3).tap { |e| e.add(:bats) }
 		end 
 
 		let(:sensed) { Set.new } 
@@ -22,6 +22,18 @@ module HuntTheWumpus
 			empty_room.connect(bat_room)
 			empty_room.connect(wumpus_room)
 		end
+
+		it "can enter the room" do
+			player.enter(empty_room)
+			expect(player.room.number).to eq 1 
+		end
+
+		it "can remember senses" do
+			player.sense :wumpus do
+				'this is terrible smell!'
+			end
+			expect(player.senses[:wumpus].call).to eq 'this is terrible smell!'  
+		end		
 
 
 	end
