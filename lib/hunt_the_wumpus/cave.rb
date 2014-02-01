@@ -56,10 +56,6 @@ module HuntTheWumpus
     	end
     end
 
-    def add(room)
-   		rooms << room unless room(room.number)
-    end
-
   end
 
 end

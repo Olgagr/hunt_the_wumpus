@@ -44,6 +44,8 @@ module HuntTheWumpus
 
 		
 
+		
+
 		it "can remember senses" do
 			player.sense :wumpus do
 				'this is terrible smell!'
