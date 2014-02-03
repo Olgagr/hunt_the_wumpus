@@ -74,7 +74,5 @@ module HuntTheWumpus
 		end
 
 
-
-
 	end
 end
