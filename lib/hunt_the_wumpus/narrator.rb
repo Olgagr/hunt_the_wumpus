@@ -3,7 +3,7 @@ module HuntTheWumpus
 	class Narrator
 
 		def say(text)
-			puts text
+			$stdout.puts text
 		end
 		
 	end
