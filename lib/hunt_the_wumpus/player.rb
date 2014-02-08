@@ -34,6 +34,10 @@ module HuntTheWumpus
 				action.call if room.neighbors.any? { |n| n.has?(hazard) }
 			end
 		end
+
+		def act(action, destination)
+			actions[action].call(destination)
+		end
 		
 	end
 

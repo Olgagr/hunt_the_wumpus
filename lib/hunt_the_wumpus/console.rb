@@ -30,7 +30,7 @@ module HuntTheWumpus
 
 		def accepting_player_input
 			narrator.say '-----------------------------------------'
-			command = narrator.ask 'What do you want to do ? (m)ove or (shoot) ?'
+			command = narrator.ask 'What do you want to do ? (m)ove or (s)hoot ?'
 
 			unless ['m', 's'].include?(command)
 				narrator.say 'Invalid action! Try again.'
@@ -39,7 +39,7 @@ module HuntTheWumpus
 
 			dest = narrator.ask('Where?').to_i
 
-			unless player.room.exits.include?(dest)
+			unless player.room.exits.map(&:number).include?(dest)
 				narrator.say 'You do not see such room.'
 				return
 			end
